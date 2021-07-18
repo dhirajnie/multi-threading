@@ -33,7 +33,14 @@ class Countdown {
             default:
                 color = ThreadColor.ANSI_GREEN;
         }
-        // synchronized block cost the performance
+        /* 1.synchronized block cost the performance
+         2.Thread get block and keep waiting for the lock
+         3. There is no FCFS acquiration of lock
+         4. It has to be in same method block
+         5. This will work only for same JVM. We have to lock across multiple JVM this wont work
+
+         Solution of these problem is RENTRANT LOCK
+         */
         synchronized (this) {
             for (i = 10; i > 0; i--) {
                 System.out.println(color + Thread.currentThread().getName() + ": i =" + i);
